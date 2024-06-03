@@ -97,7 +97,7 @@ input {
 
 .add-form .btn-desc {
   text-transform: uppercase;
-  border: var(--color-primary) .3rem solid;
+  border: var(--color-primary) .2rem solid;
   cursor: pointer;
   transition: ease-in 0.1s;
   padding:.5rem;
@@ -113,6 +113,7 @@ input {
 
 .add-form button:hover {
   background-color: var(--color-hover);
+  color: var(--color-secondary);
 }
 
 .list {
@@ -126,7 +127,7 @@ input {
 }
 
 .list span .title{
-  visibility: hidden;
+    visibility: hidden;
     width: max-content;
     background-color: var(--color-secondary);
     border: var(--color-border) solid .2rem;
@@ -175,14 +176,7 @@ input[type="checkbox"] {
   accent-color: var(--color-accent);
 }
 
-.list li button {
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  padding: 0.8rem;
-  transform: translateY(2px);
-}
+
 
 footer{
   position: fixed;
@@ -196,21 +190,57 @@ footer{
     0px 20px 60px var(--color-border);}
 
 .option-description{
+  border-radius: 4px;
+  padding: 5%;
  position: absolute;
  transform: translate(-50%,-50%);
  top: 50%;
  left: 50%; 
- height: 50%;
- width: 60%;
+  width: 90%;
  background-color: var(--color-secondary);
- z-index: 2;
+ box-shadow: 0px 0px 50px 1px var(--color-border);
 }
-.option-description input{
+input{
+    letter-spacing: 2px;
+}
+.option-description textarea{
+  display: flex;
+  justify-content: center;
   width: 100%;
-  height: 100%;
-  padding: 0;
+  height: 150px;
+  padding: 12px 20px;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+  line-height: 1.5;
   text-align: start;
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+}
+
+.add-form .option-description {
+  background-image: url(./img/bg.png);
+    z-index: 1000;
+}
+
+input::-webkit-datetime-edit-day-field:focus,
+input::-webkit-datetime-edit-month-field:focus,
+input::-webkit-datetime-edit-year-field:focus {
+  background-color: var(--color-hover);
+  color: white;
+  outline: none;
+}
+
+/* Add styles for the rest of your component as needed */
 @media (max-width: 600px) {
   form {
     display: block;

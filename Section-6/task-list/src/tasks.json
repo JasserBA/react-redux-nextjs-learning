@@ -5,15 +5,13 @@
       "title": "Finish React project",
       "description": "Complete the task management project for the client",
       "dueDate": "2024-06-15",
-      "priority": "High",
       "completed": false
-    },
+    }, 
     {
       "id": 2,
       "title": "Grocery shopping",
       "description": "Buy groceries for the week",
       "dueDate": "2024-06-12",
-      "priority": "Medium",
       "completed": true
     },
     {
@@ -21,7 +19,6 @@
       "title": "Workout",
       "description": "Go to the gym for a 1-hour workout",
       "dueDate": "2024-06-10",
-      "priority": "Low",
       "completed": false
     }
   ]

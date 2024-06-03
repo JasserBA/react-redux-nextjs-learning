@@ -1,12 +1,11 @@
 import React from "react";
 import Task from "./Task";
-import taskData from "../tasks.json";
 
-const TaskLists = () => {
+const TaskLists = ({ taskData }) => {
   return (
     <div className="list">
       <ul>
-        {taskData.tasks.map((t) => (
+        {taskData.map((t) => (
           <div key={t.id}>
             <Task task={t} />
           </div>
