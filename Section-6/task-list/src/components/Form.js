@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import taskData from '../tasks.json'
 
 const Form = ({ onAddtasks }) => {
   const [toggle, setToggle] = useState(false);
@@ -37,18 +36,6 @@ const Form = ({ onAddtasks }) => {
       <div className="add-form">
         <form onSubmit={(e) => handleClick(e)}>
           <div>
-            {/*<select>
-          <option value="Select">
-            --Select--
-          </option>
-          {taskData.tasks.map((t) => {
-            return (
-              <option key={t.id} value={t.title}>
-                {t.title}
-              </option>
-            );
-          })}
-        </select>*/}
             <label htmlFor="task">
               <h4>What task(s) you need ?</h4>
             </label>

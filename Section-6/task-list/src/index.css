@@ -17,7 +17,7 @@
 
 html {
   font-size: 50%;
-}
+    height: 100%;}
 
 body {
   background-image: url(./img/bg.png);
@@ -93,6 +93,7 @@ input {
   border-radius: 4px;
   padding: 1.2rem 3.2rem;
   font-size: 1.8rem;
+    font-weight: 700;
 }
 
 .add-form .btn-desc {
@@ -124,6 +125,7 @@ input {
   flex-direction: column;
   gap: 3.2rem;
   align-items: center;
+  height: 100%;
 }
 
 .list span .title{
@@ -145,13 +147,19 @@ input {
   visibility: visible;
 }
 
+.actions button{
+  cursor: pointer;
+}
+
 .actions button,
 .list select {
   text-transform: uppercase;
-  padding: 0.8rem 2.4rem;
-  font-size: 1.4rem;
   font-weight: 700;
   margin: 0 0.8rem;
+  border: var(--color-border) .2rem solid;
+}
+.actions option:hover{
+  background-color: var(--color-hover);
 }
 
 .list ul {
@@ -180,14 +188,14 @@ input[type="checkbox"] {
 
 footer{
   position: fixed;
-  left: 0;
   bottom: 0;
   width: 100%;
+  margin: 0 auto;
   text-align: center;
   font-weight: 700;
   padding: 3.2rem 0;
-  box-shadow: 0px 20px 20px var(--color-border),
-    0px 20px 60px var(--color-border);}
+  box-shadow: 0px 10px 60px var(--color-border);
+}
 
 .option-description{
   border-radius: 4px;
@@ -210,7 +218,7 @@ input{
   height: 150px;
   padding: 12px 20px;
   border-radius: 4px;
-  background-color: #f8f8f8;
+  background-color: var(--color-secondary);
   font-size: 16px;
   resize: none;
   line-height: 1.5;
@@ -218,6 +226,8 @@ input{
 }
 
 .overlay {
+  cursor: url('./img/cursor-close.png') 16 16,
+    auto;
   position: fixed;
   top: 0;
   left: 0;
@@ -236,7 +246,7 @@ input::-webkit-datetime-edit-day-field:focus,
 input::-webkit-datetime-edit-month-field:focus,
 input::-webkit-datetime-edit-year-field:focus {
   background-color: var(--color-hover);
-  color: white;
+  color: var(--color-secondary);
   outline: none;
 }
 
@@ -252,5 +262,9 @@ input::-webkit-datetime-edit-year-field:focus {
 
   .list span:active .title {
     visibility: visible;
+  }
+
+  footer{
+      position: relative;
   }
 }
