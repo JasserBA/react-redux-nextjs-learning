@@ -9,3 +9,7 @@
  ### EXERCISE #1: Flashcards
 #### View [demo](https://codesandbox.io/p/sandbox/exercise-1-flashcards-2qn8yw " Here !")
 ---
+
+ ###  CHALLENGE #2: Date Counter (v2)
+#### View [demo](https://codesandbox.io/p/sandbox/challenge-2-date-counter-v2-s76y33 " Here !")
+---
