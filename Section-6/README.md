@@ -5,3 +5,7 @@
  ### CHALLENGE #1: Date Counter (v1)
 #### View [demo](https://codesandbox.io/p/sandbox/challenge-1-date-counter-v1-7n66vl " Here !")
 ---
+
+ ### EXERCISE #1: Flashcards
+#### View [demo](https://codesandbox.io/p/sandbox/exercise-1-flashcards-2qn8yw " Here !")
+---
