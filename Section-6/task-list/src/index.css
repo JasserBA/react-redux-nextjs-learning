@@ -7,6 +7,7 @@
   --color-hover: #3d3d42;
   --color-border: #262629;
   --color-accent: #ffee00;
+  --gradient-base: #333333;
 }
 
 * {
@@ -233,7 +234,8 @@ input{
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color:var(--gradient-base);
+  opacity: .9;
   z-index: 999;
 }
 
