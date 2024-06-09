@@ -1,33 +1,39 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-const Task = ({ task }) => {
-  const [isChecked, setIsChecked] = useState(task.completed)
+const Task = ({ task, onDeleteTask, onToggleItem }) => {
   return (
     <div style={{ display: "inline-flex", alignItems: "end" }}>
-      <li style={isChecked ? { textDecorationLine: "line-through" } : null}>
+      <li
+        style={task.completed ? { textDecorationLine: "line-through" } : null}
+      >
         <input
           id={task.title}
           type="checkbox"
-          checked={isChecked ? true : false}
-          onChange={() => setIsChecked(!isChecked)}
+          checked={task.completed}
+          value={task.completed}
+          onChange={() => onToggleItem(task.id)}
         />
         <label htmlFor={task.title}>
           <span style={{ position: "relative" }}>
             <em
               style={{
                 fontWeight: "lighter",
-                fontSize: "medium"
+                fontSize: "medium",
               }}
             >
               {task.dueDate}
             </em>
             <br />
             {task.title}
-            <span className="title">{task.description}</span>
+            {task.description !== "" && (
+              <span className="title">{task.description}</span>
+            )}
           </span>
         </label>
       </li>
-      <span style={{ cursor: "pointer" }}>❌</span>
+      <span style={{ cursor: "pointer" }} onClick={() => onDeleteTask(task.id)}>
+        ❌
+      </span>
     </div>
   );
 };

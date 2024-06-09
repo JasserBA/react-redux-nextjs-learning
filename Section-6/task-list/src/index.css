@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap');
 
 :root {
-  --color-primary: #262629;
+  --color-primary: #2f2f33;
   --color-secondary: #ffffff;
   --color-highlight: #ffee00;
-  --color-hover: #3d3d42;
+  --color-hover: #1c1c1e;
   --color-border: #262629;
   --color-accent: #ffee00;
   --gradient-base: #333333;

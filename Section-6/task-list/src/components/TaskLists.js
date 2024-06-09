@@ -1,23 +1,22 @@
 import React from "react";
 import Task from "./Task";
 
-const TaskLists = ({ 
-  taskData , 
+const TaskLists = ({
+  taskData,
   onDeleteTask,
-  onToggleTask,
-  onClearList,}) => {
+  onClearAllTasks,
+  onToggleItem,
+}) => {
   return (
     <div className="list">
       <ul>
         {taskData.map((t) => (
-          <div>
             <Task
               task={t}
               key={t.id}
               onDeleteTask={onDeleteTask}
-              onToggleTask={onToggleTask}
+              onToggleItem={onToggleItem}
             />
-          </div>
         ))}
       </ul>
       <div className="actions">
@@ -26,7 +25,7 @@ const TaskLists = ({
           <option value="description">Sort by description</option>
           <option value="packed">Sort by packed status</option>
         </select>
-        <button onClick={(e) => onClearList}>Clear list 🗑️</button>
+        <button onClick={onClearAllTasks}>Clear list 🗑️</button>
       </div>
     </div>
   );

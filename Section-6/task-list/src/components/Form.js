@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 
-const Form = ({ onAddtasks }) => {
+const Form = ({ onAddtask }) => {
   const [toggle, setToggle] = useState(false);
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
@@ -8,7 +8,7 @@ const Form = ({ onAddtasks }) => {
 
   function handleClick(e) {
     e.preventDefault();
-    if (!title || !date || !description) return;
+    if (!title || !date) return;
 
     const newTask = {
       id: Date.now(),
@@ -17,11 +17,12 @@ const Form = ({ onAddtasks }) => {
       date,
       completed: false,
     };
-    onAddtasks(newTask);
+    onAddtask(newTask);
     setTitle("");
     setDescription("");
     setDate("");
   }
+
   return (
     <div>
       {toggle && (
@@ -36,24 +37,24 @@ const Form = ({ onAddtasks }) => {
       <div className="add-form">
         <form onSubmit={(e) => handleClick(e)}>
           <div>
-            <label htmlFor="task">
-              <h4>What task(s) you need ?</h4>
+            <label htmlFor="taskTitle">
+              <h4>What task(s) do you need?</h4>
             </label>
             <input
               value={title}
-              id="task"
+              id="taskTitle"
               type="text"
               placeholder="task..."
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div>
-            <label htmlFor="date">
-              <h4>Enter your Deadline :</h4>
+            <label htmlFor="taskDate">
+              <h4>Enter your Deadline:</h4>
             </label>
             <input
               value={date}
-              id="date"
+              id="taskDate"
               type="date"
               onChange={(e) => setDate(e.target.value)}
             />
@@ -77,12 +78,12 @@ const Form = ({ onAddtasks }) => {
           </button>
           {toggle && (
             <div className="option-description">
-              <label htmlFor="textArea">
-                <h4>Enter your description :</h4>
+              <label htmlFor="taskDescription">
+                <h4>Enter your description:</h4>
               </label>
               <textarea
                 value={description}
-                id="textArea"
+                id="taskDescription"
                 onChange={(e) => setDescription(e.target.value)}
               />
               <button
@@ -103,4 +104,4 @@ const Form = ({ onAddtasks }) => {
   );
 };
 
-export default Form
+export default Form;
