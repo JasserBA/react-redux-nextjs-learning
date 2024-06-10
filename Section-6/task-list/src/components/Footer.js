@@ -1,11 +1,15 @@
-import React from 'react'
+import React from "react";
 
-const Footer = () => {
+const Footer = ({ nbTasks, nbDoneTasks, percentage }) => {
   return (
     <footer className="stats">
-      <em>Your have x tasks on your list, and you already done X (X%)</em>
+      <em>
+        {nbTasks === 0
+          ? "You have completed all tasks, go chill out!"
+          : `You have ${nbTasks} tasks on your list, and you have completed ${nbDoneTasks} (${percentage}%)`}
+      </em>
     </footer>
   );
-}
+};
 
-export default Footer
+export default Footer;

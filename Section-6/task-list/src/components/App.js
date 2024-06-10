@@ -22,7 +22,7 @@ function App() {
   }
 
   function handleClaerAllTasks() {
-    setTaskData(() => []);
+    setTaskData([]);
   }
 
   function onHandleToggleItem(id) {
@@ -32,6 +32,11 @@ function App() {
       )
     );
   }
+
+  const nbTasks = taskData.length;
+  const nbDoneTasks = taskData.filter((task) => task.completed).length;
+  const percentage = nbTasks > 0 ? Math.round((nbDoneTasks / nbTasks) * 100) : 0;
+  
   return (
     <div className="App">
       <Header />
@@ -42,7 +47,7 @@ function App() {
         onClearAllTasks={handleClaerAllTasks}
         onToggleItem={onHandleToggleItem}
       />
-      <Footer />
+      <Footer nbTasks={nbTasks} nbDoneTasks={nbDoneTasks} percentage={percentage} />
     </div>
   );
 }
