@@ -4,11 +4,12 @@ import Friend from './Friend';
 const FriendList = ({data}) => {
   return (
     <ul className="sidebar">
-      {data.map((friend) => (
+      {data.map((f) => (
         <Friend
-          avatar={friend.image}
-          name={friend.name}
-          balance={friend.balance}
+          key={f.id}
+          avatar={f.image}
+          name={f.name}
+          balance={f.balance}
         />
       ))}
     </ul>

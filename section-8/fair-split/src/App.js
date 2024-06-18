@@ -1,7 +1,11 @@
+import { useState } from "react";
+import Button from "./components/Button";
+import FormAddFriend from "./components/FormAddFriend";
+import FormSplit from "./components/FormSplit";
 import FriendList from "./components/FriendList";
-import RightForm from "./components/RightForm";
 
 function App() {
+  const [AddOption, setAddOption] = useState(false)
   const initialFriends = [
     {
       id: 118836,
@@ -22,11 +26,17 @@ function App() {
       balance: 0,
     },
   ];
-
+  function handleClick(e) {
+    setAddOption(!AddOption);
+  }
   return (
     <div className="App">
-      <FriendList data={initialFriends}/>
-      <RightForm />
+      <FriendList data={initialFriends} />
+      {AddOption && <FormAddFriend />}
+      <Button onAddOption={handleClick}>
+        {AddOption ? "Close" : "Add Friend"}
+      </Button>
+      <FormSplit/>
     </div>
   );
 }
