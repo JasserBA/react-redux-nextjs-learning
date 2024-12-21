@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
-const Button = ({ onAddOption, children }) => {
+const Button = ({ onClick, children }) => {
   return (
-    <button className="button" onClick={onAddOption}>
+    <button className="button" onClick={onClick}>
       {children}
     </button>
   );
 };
 
-export default Button
+export default Button;
