@@ -41,7 +41,7 @@ const FormAddFriend = ({ onAddFriend }) => {
         value={image}
         onChange={(e) => setImage(e.target.value)}
       />
-      <Button onClick={(e) => handleSumbit(e)}>Add</Button>
+      <Button>Add</Button>
     </form>
   );
 };
