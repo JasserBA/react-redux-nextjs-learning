@@ -1,3 +1,9 @@
+### CHALLENGE #1: Text Expander Component
+
+#### View [demo](https://codesandbox.io/p/sandbox/challenge-1-text-expander-component-qntjt3 " Here !")
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
