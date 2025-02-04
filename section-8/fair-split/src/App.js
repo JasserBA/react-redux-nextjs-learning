@@ -52,11 +52,7 @@ function App() {
         <FormSplit
           selectedFriend={selectedFriend}
           onSplitBill={handleSplitBill}
-<<<<<<< HEAD
           key={selectedFriend.id} //
-=======
-          key={selectedFriend.id}
->>>>>>> e52e39c (fix: added keyProps)
         />
       )}
     </div>
