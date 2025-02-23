@@ -69,7 +69,7 @@ function TabContent({ item }) {
   console.log("render");
 
   function handleInc() {
-    setLikes(likes + 1);
+    setLikes((likes) => likes + 1);
   }
 
   function handleTripleInc() {
