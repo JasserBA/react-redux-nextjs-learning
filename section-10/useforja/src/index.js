@@ -22,7 +22,8 @@ function Test() {
 */
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  <>
+    // removed StrictMode to avoid double useEffect
     <App />
     {/* <StarRating maxRating={"5"} />
     <StarRating maxRating={14} color="red" />
@@ -30,5 +31,5 @@ root.render(
     <StarRating messages={["Terrible", "Bad", "Okay", "Amazing"]} />
     <StarRating defaultRating={3} />
     <Test /> */}
-  </React.StrictMode>
+  </>
 );

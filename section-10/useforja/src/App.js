@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "./images/logo.png";
 
 const tempMovieData = [
@@ -54,13 +54,22 @@ const average = (arr) =>
 const KEY = "7ed26569";
 
 export default function App() {
-  const [movies, setMovies] = useState(tempMovieData);
-  const [watched, setWatched] = useState(tempWatchedData);
+  const [movies, setMovies] = useState([]);
+  const [watched, setWatched] = useState([]);
 
-  // fetch data from omdbapicom
-  fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=x`)
-    .then((res) => res.json())
-    .then((res) => console.log(res));
+  useEffect(() => {
+    async function fetchMovies() {
+      // fetch data from omdbapicom
+      const res = await fetch(
+        `http://www.omdbapi.com/?apikey=${KEY}&s=Interstellar`
+      );
+      const data = await res.json();
+      setMovies(data.Search);
+      console.log(data.Search);
+    }
+    fetchMovies();
+  }, []);
+
   return (
     <>
       <Navbar movies={movies}>
