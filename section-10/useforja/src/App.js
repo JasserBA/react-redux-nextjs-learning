@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logo from "./images/logo.png";
+
 const tempMovieData = [
   {
     imdbID: "tt1375666",
@@ -50,10 +51,16 @@ const tempWatchedData = [
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
+const KEY = "7ed26569";
+
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
 
+  // fetch data from omdbapicom
+  fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=x`)
+    .then((res) => res.json())
+    .then((res) => console.log(res));
   return (
     <>
       <Navbar movies={movies}>
