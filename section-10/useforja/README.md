@@ -4,6 +4,10 @@
 
 ---
 
+## Note about section-10/useForja
+
+The useEffect actually only run after the browser paint
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
