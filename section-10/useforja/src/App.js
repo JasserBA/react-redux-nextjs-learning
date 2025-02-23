@@ -56,6 +56,7 @@ const KEY = "7ed26569";
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchMovies() {
@@ -66,6 +67,7 @@ export default function App() {
       const data = await res.json();
       setMovies(data.Search);
       console.log(data.Search);
+      setIsLoading(false);
     }
     fetchMovies();
   }, []);
@@ -77,9 +79,7 @@ export default function App() {
         <NumResults movies={movies} />
       </Navbar>
       <Main>
-        <Box>
-          <MoviesList movies={movies} />
-        </Box>
+        <Box>{isLoading ? <Loader /> : <MoviesList movies={movies} />}</Box>
         <Box>
           <WatchedSummary watched={watched} />
           <WatchedMoviesList watched={watched} />
@@ -87,6 +87,10 @@ export default function App() {
       </Main>
     </>
   );
+}
+
+function Loader() {
+  return <p className="loader">Loading ..</p>;
 }
 
 function Navbar({ children }) {

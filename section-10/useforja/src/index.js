@@ -23,7 +23,7 @@ function Test() {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>
-    // removed StrictMode to avoid double useEffect
+    {/* removed StrictMode to avoid double useEffect */}
     <App />
     {/* <StarRating maxRating={"5"} />
     <StarRating maxRating={14} color="red" />
