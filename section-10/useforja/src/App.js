@@ -116,7 +116,7 @@ export default function App() {
 
   return (
     <>
-      <Navbar movies={movies} set>
+      <Navbar>
         <Search query={query} setQuery={setQuery} />
         <NumResults movies={movies} />
       </Navbar>
