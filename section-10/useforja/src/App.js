@@ -329,6 +329,18 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     getMovieDetails();
   }, [selectedId]);
 
+  useEffect(
+    function () {
+      if (!title) return;
+      document.title = `Movie | ${title}`;
+
+      return function () {
+        document.title = "useForja";
+        console.log(`Clean up effect for movie name | ${title}`);
+      };
+    },
+    [title]
+  );
   return (
     <div className="Details">
       {isLoading ? (
