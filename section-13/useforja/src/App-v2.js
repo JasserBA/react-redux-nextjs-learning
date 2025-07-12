@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import logo from "./images/logo.png";
 import StarRating from "./StarRating";
+import useMovies from "./helpers/useMovies";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -8,12 +9,11 @@ const average = (arr) =>
 const KEY = "7ed26569";
 
 export default function AppV2() {
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const tempQuery = "fight";
   const [selectedId, setSelectedId] = useState(null);
+
+  const { error, isLoading, movies } = useMovies(query);
 
   // const [watched, setWatched] = useState([]);
   const [watched, setWatched] = useState(() => {
@@ -45,50 +45,6 @@ export default function AppV2() {
   useEffect(() => {
     localStorage.setItem("watched", JSON.stringify(watched));
   }, [watched]);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    async function fetchMovies() {
-      try {
-        setIsLoading(true);
-        setError("");
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
-          { signal: controller.signal }
-        );
-
-        if (!res.ok) {
-          throw new Error("Failed to fetch ❌"); // it will send message to catch's condition
-        }
-
-        // fetch data from omdbapicom
-        const data = await res.json();
-
-        // if query result is not exist
-        if (data.Response === "False") throw new Error("No movies found 🛑");
-        setMovies(data.Search);
-        console.log(data.Search);
-      } catch (err) {
-        if (err.name !== "AbortError") {
-          console.error(err.message);
-          setError(err.message);
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    if (!query.length) {
-      setMovies([]);
-      setError("");
-      return;
-    }
-    handleCloseMovie();
-    fetchMovies();
-    return function () {
-      controller.abort();
-    };
-  }, [query]);
 
   return (
     <>
