@@ -9,12 +9,21 @@ const KEY = "7ed26569";
 
 export default function AppV2() {
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const tempQuery = "fight";
   const [selectedId, setSelectedId] = useState(null);
+
+  // const [watched, setWatched] = useState([]);
+  const [watched, setWatched] = useState(() => {
+    const storedValue = localStorage.getItem("watched");
+    return JSON.parse(storedValue); // parse because the type is string as we did JSON.stringify
+  });
+
+  /*  // ⚠️ do not do useState like this!
+  useState(localStorage.getItem("watched"))
+  */
 
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (selectedId === id ? null : id));
@@ -31,6 +40,11 @@ export default function AppV2() {
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
+
+  // When delete movie from list, automatically removed here from the local storage as well
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify(watched));
+  }, [watched]);
 
   useEffect(() => {
     const controller = new AbortController();
