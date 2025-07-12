@@ -3,6 +3,7 @@ import logo from "./images/logo.png";
 import StarRating from "./StarRating";
 import useMovies from "./helpers/useMovies";
 import { useLocalStorage } from "./helpers/useLocalStorage";
+import { useKey } from "./helpers/useKey";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -95,21 +96,11 @@ function Navbar({ children }) {
 
 function Search({ query, setQuery }) {
   const inputEl = useRef(null);
-
-  useEffect(() => {
-    // const el = document.querySelector(".search");
-    // el.focus();
-    const callback = (e) => {
-      if (document.activeElement === inputEl.current) return;
-      if (e.code === "Enter") {
-        inputEl.current.focus();
-        setQuery("");
-      }
-    };
-
-    document.addEventListener("keydown", callback);
-    return () => document.addEventListener("keydown", callback);
-  }, [setQuery]);
+  useKey("Enter", (e) => {
+    if (document.activeElement === inputEl.current) return;
+    inputEl.current.focus();
+    setQuery("");
+  });
 
   return (
     <input
@@ -257,20 +248,7 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     setAvgRating((x) => (x + userRating) / 2);
   }
 
-  useEffect(() => {
-    function callback(e) {
-      if (e.code === "Escape") {
-        onCloseMovie();
-        console.log("CLOSING");
-      }
-    }
-
-    document.addEventListener("keydown", callback);
-
-    return () => {
-      document.removeEventListener("keydown", callback);
-    };
-  }, [onCloseMovie]);
+  useKey("Escape", onCloseMovie());
 
   useEffect(() => {
     async function getMovieDetails() {
