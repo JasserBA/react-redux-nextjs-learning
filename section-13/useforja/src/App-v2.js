@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import logo from "./images/logo.png";
 import StarRating from "./StarRating";
 import useMovies from "./helpers/useMovies";
+import { useLocalStorage } from "./helpers/useLocalStorage";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -16,10 +17,7 @@ export default function AppV2() {
   const { error, isLoading, movies } = useMovies(query);
 
   // const [watched, setWatched] = useState([]);
-  const [watched, setWatched] = useState(() => {
-    const storedValue = localStorage.getItem("watched");
-    return JSON.parse(storedValue); // parse because the type is string as we did JSON.stringify
-  });
+  const [watched, setWatched] = useLocalStorage([], "watched");
 
   /*  // ⚠️ do not do useState like this!
   useState(localStorage.getItem("watched"))
@@ -40,11 +38,6 @@ export default function AppV2() {
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
-
-  // When delete movie from list, automatically removed here from the local storage as well
-  useEffect(() => {
-    localStorage.setItem("watched", JSON.stringify(watched));
-  }, [watched]);
 
   return (
     <>
