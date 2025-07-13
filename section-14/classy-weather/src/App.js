@@ -21,10 +21,14 @@ class Counter extends React.Component {
   }
 
   render() {
+    const date = new Date("january 19 2027");
+
     return (
       <>
         <button onClick={this.handleMinus}>-</button>
-        <span>{this.state.counter}</span>
+        <span>
+          {date.toDateString()} - {this.state.counter}
+        </span>
         <button onClick={this.handleAdd}>+</button>
       </>
     );
