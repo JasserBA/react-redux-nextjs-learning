@@ -15,7 +15,7 @@ body {
   font-size: 2rem;
   height: 100vh;
   color: #222;
-  background-color: #eabfb9;
+  background-color: #b9dfea;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,7 +49,7 @@ input {
   font-family: inherit;
   color: inherit;
   font-size: 2rem;
-  background-color: #f0d2ce;
+  background-color: #b9ceea;
   padding: 1.6rem 3.2rem;
   border: none;
   width: 32rem;
@@ -66,7 +66,7 @@ input:focus {
 }
 
 .day {
-  background-color: #f0d2ce;
+  background-color: #99736e;
   padding: 1.6rem 0 2rem;
   width: 12.8rem;
 
@@ -89,4 +89,10 @@ input:focus {
 .loader {
   font-size: 2.4rem;
   font-weight: 700;
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
 }
