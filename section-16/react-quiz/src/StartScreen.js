@@ -4,8 +4,8 @@ const StartScreen = ({ numQuestions }) => {
   return (
     <div className="start">
       <h2>Welcome to the React quiz</h2>
-      <p>{numQuestions} question to test your React mastery</p>
-      <button>Start QUIZ</button>
+      <h3>{numQuestions} question to test your React mastery</h3>
+      <button className="btn btn-ui">Start QUIZ</button>
     </div>
   );
 };
