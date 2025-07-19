@@ -1,5 +1,4 @@
-import { Options } from "./components/Options";
-
+import { Options } from "./Options";
 const Question = ({ question, dispatch, answer }) => {
   return (
     <div>

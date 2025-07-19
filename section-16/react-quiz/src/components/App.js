@@ -6,6 +6,9 @@ import Loader from "./Loader";
 import Error from "./Error";
 import StartScreen from "./StartScreen";
 import Question from "./Question";
+import { NextButton } from "./NextButton";
+import { Progress } from "./Progress";
+import { FinishScreen } from "./FinishScreen";
 const initialState = {
   questions: [],
 
@@ -14,6 +17,7 @@ const initialState = {
   index: 0,
   answer: null,
   points: 0,
+  highScore: 0,
 };
 
 function reducer(state, action) {
@@ -29,7 +33,7 @@ function reducer(state, action) {
     case "start":
       return { ...state, status: "active" };
     case "newAnswer":
-      const question = state.question.at(state.index);
+      const question = state.questions.at(state.index);
       return {
         ...state,
         answer: action.payload,
@@ -38,17 +42,39 @@ function reducer(state, action) {
             ? state.points + question.points // each question has their points
             : state.points,
       };
+    case "nextQuestion":
+      return { ...state, index: state.index + 1, answer: null };
+    case "finish":
+      return {
+        ...state,
+        status: "finished",
+        highScore:
+          state.points > state.highScore ? state.points : state.highScore,
+      };
+    case "restart":
+      return { ...initialState, questions: state.questions, status: "ready" };
+    // return {
+    //   ...state,
+    //   question: state.questions,
+    //   points: 0,
+    //   highScore: 0,
+    //   index: 0,
+    //   answer: null,
+    //   status: "ready",
+    // };
     default:
       throw new Error("Action unknown");
   }
 }
 function App() {
-  const [{ questions, status, answer }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ questions, status, index, answer, points, highScore }, dispatch] =
+    useReducer(reducer, initialState);
 
   const numQuestions = questions.length;
+  const maxPossiblePoints = questions.reduce(
+    (prev, cur) => prev + cur.points,
+    0
+  );
 
   useEffect(() => {
     fetch("http://localhost:8000/questions")
@@ -73,10 +99,34 @@ function App() {
           <StartScreen numQuestions={numQuestions} dispatch={dispatch} />
         )}
         {status === "active" && (
-          <Question
-            question={questions[initialState.index]}
+          <>
+            <Progress
+              index={index}
+              numQuestions={numQuestions}
+              points={points}
+              maxPossiblePoints={maxPossiblePoints}
+              answer={answer}
+            />
+            <Question
+              question={questions[index]}
+              dispatch={dispatch}
+              answer={answer}
+            />
+            {/* only show if answered */}
+            <NextButton
+              dispatch={dispatch}
+              answer={answer}
+              index={index}
+              numQuestions={numQuestions}
+            />
+          </>
+        )}
+        {status === "finished" && (
+          <FinishScreen
+            points={points}
+            maxPossiblePoints={maxPossiblePoints}
+            highScore={highScore}
             dispatch={dispatch}
-            answer={answer}
           />
         )}
       </Main>
