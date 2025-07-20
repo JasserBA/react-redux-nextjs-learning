@@ -1,18 +1,18 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
 import Product from "./pages/Product";
 import Pricing from "./pages/Pricing";
 import PageNotFound from "./pages/PageNotFound";
+import Homepage from "./pages/Homepage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage/>} />
+        <Route path="/" element={<Homepage />} />
         <Route path="product" element={<Product />} />
         <Route path="pricing" element={<Pricing />} />
-        <Route path="*" element={<PageNotFound/>} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
