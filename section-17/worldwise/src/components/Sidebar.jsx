@@ -12,7 +12,7 @@ export const Sidebar = () => {
       <p>List of cities</p>
       <footer className={styles.footer}>
         <p className={styles.copyright}>
-          &copy; Copyright {new Date().getFullYear} by Worldwise Inc.
+          &copy; Copyright {new Date().getFullYear()} by Worldwise Inc.
         </p>
       </footer>
     </div>
