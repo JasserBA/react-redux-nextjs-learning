@@ -1,5 +1,16 @@
-import React from "react";
 import styles from "./CountryList.module.css";
-export const CountryList = () => {
-  return <div className={styles.countryList}>CountryList</div>;
+import Spinner from "./Spinner";
+import CountryItem from "./CountryItem";
+import Message from "./Message";
+
+export const CountryList = ({ data, isLoading }) => {
+  if (isLoading) return <Spinner />;
+  if (!data.length) return <Message message="Add your first country" />;
+  return (
+    <ul className={styles.countryList}>
+      {data.map((currentCountry, index) => (
+        <CountryItem key={index} currentCountry={currentCountry} />
+      ))}
+    </ul>
+  );
 };
