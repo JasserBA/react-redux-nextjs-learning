@@ -13,7 +13,6 @@ import { useEffect, useState } from "react";
 const URL = "http://localhost:8000";
 function App() {
   const [cities, setCities] = useState([]);
-  const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -29,23 +28,8 @@ function App() {
         setIsLoading(false);
       }
     }
-
-    async function fetchCountries() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(`${URL}/countries`);
-        const data = await res.json();
-        setCountries(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
     fetchCities();
-    fetchCountries();
-  }, [setCities, setCountries]);
+  }, [setCities]);
   return (
     <BrowserRouter>
       <Routes>
@@ -57,7 +41,7 @@ function App() {
           />
           <Route
             path="countries"
-            element={<CountryList data={countries} isLoading={isLoading} />}
+            element={<CountryList cities={cities} isLoading={isLoading} />}
           />
           <Route path="form" element={<p>Form</p>} />
         </Route>

@@ -8,8 +8,8 @@ export const CityList = ({ data, isLoading }) => {
   if (!data.length) return <Message message="Add your first city" />;
   return (
     <ul className={styles.cityList}>
-      {data.map((city, index) => (
-        <CityItem key={index} city={city} />
+      {data.map((city) => (
+        <CityItem key={city.id} city={city} />
       ))}
     </ul>
   );
