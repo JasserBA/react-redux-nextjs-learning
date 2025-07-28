@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+/* eslint-disable react-refresh/only-export-components */
 
 const CitiesContext = createContext();
 
@@ -28,5 +29,11 @@ function CitiesProvider({ children }) {
     </CitiesContext.Provider>
   );
 }
+function useCities() {
+  const context = useContext(CitiesContext);
+  if (!context)
+    throw new Error("useCities must be used within a CitiesProvider");
+  return context;
+}
 
-export { CitiesContext, CitiesProvider };
+export { CitiesProvider, useCities };

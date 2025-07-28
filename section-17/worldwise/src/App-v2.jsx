@@ -21,15 +21,9 @@ function AppV2() {
           <Route index path="/" element={<Homepage />} />
           <Route path="app" element={<AppLayout />}>
             <Route index element={<Navigate replace to="cities" />} />
-            <Route
-              path="cities"
-              element={<CityList data={cities} isLoading={isLoading} />}
-            />
+            <Route path="cities" element={<CityList />} />
             <Route path="cities/:id" element={<City />} />
-            <Route
-              path="countries"
-              element={<CountryList cities={cities} isLoading={isLoading} />}
-            />
+            <Route path="countries" element={<CountryList />} />
             <Route path="form" element={<Form />} />
           </Route>
           <Route path="product" element={<Product />} />
