@@ -10,6 +10,9 @@ import {
   useMapEvent,
 } from "react-leaflet";
 import { useCities } from "../context/CitiesContext";
+import { useGeolocation } from "../hooks/useGeolocation";
+import { Button } from "./Button";
+import Spinner from "./Spinner";
 // eslint-disable-next-line no-unused-vars
 
 export const Map = () => {
@@ -17,14 +20,24 @@ export const Map = () => {
   /* eslint-disable no-unused-vars */
   const { cities } = useCities();
   const [searchParams, setSearchParams] = useSearchParams();
-
   const [mapPosition, setMapPosition] = useState([19, 19]);
+  const {
+    isLoading: isLoadingPosition,
+    position: geoLocationPosition,
+    getPosition,
+  } = useGeolocation();
+
   const mapLat = searchParams.get("lat");
   const mapLng = searchParams.get("lng");
 
   useEffect(() => {
     setMapPosition([mapLat || 19, mapLng || 19]);
   }, [mapLat, mapLng]);
+
+  useEffect(() => {
+    if (geoLocationPosition)
+      setMapPosition([geoLocationPosition.lat, geoLocationPosition.lng]);
+  }, [geoLocationPosition]);
   return (
     <div
       className={styles.mapContainer}
@@ -32,6 +45,11 @@ export const Map = () => {
         navigate("form");
       }}
     >
+      {!geoLocationPosition && (
+        <Button type="position" onClick={getPosition}>
+          {isLoadingPosition ? "Loading ..." : "use your position"}
+        </Button>
+      )}
       <MapContainer
         center={mapPosition} // center={[mapLat || 19, mapLng || 19]}
         zoom={13}
