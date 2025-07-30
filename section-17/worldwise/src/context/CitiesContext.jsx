@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 /* eslint-disable react-refresh/only-export-components */
 const URL = "http://localhost:8000";
 const CitiesContext = createContext();
+/* eslint-disable no-unused-vars */
 
 function CitiesProvider({ children }) {
   const [cities, setCities] = useState([]);
@@ -27,9 +28,9 @@ function CitiesProvider({ children }) {
   async function getCity(id) {
     try {
       setIsLoading(true);
-      const res = await fetch(`${URL}/cities//${id}`);
+      const res = await fetch(`${URL}/cities/${id}`);
       const data = await res.json();
-      setCurrentCity(data);
+      // setCurrentCity(data);
     } catch (error) {
       console.error(error);
     } finally {

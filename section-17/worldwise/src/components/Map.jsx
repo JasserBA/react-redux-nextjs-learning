@@ -1,17 +1,30 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Map.module.css";
-import { useNavigate } from "react-router-dom";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMap,
+  useMapEvent,
+} from "react-leaflet";
 import { useCities } from "../context/CitiesContext";
+// eslint-disable-next-line no-unused-vars
 
 export const Map = () => {
   const navigate = useNavigate();
+  /* eslint-disable no-unused-vars */
   const { cities } = useCities();
-  const [mapPosition, _setMapPosition] = useState([19, 19]);
-  /* const [searchParams, setSearchParams] = useSearchParams();
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
-  setSearchParams; */
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [mapPosition, setMapPosition] = useState([19, 19]);
+  const mapLat = searchParams.get("lat");
+  const mapLng = searchParams.get("lng");
+
+  useEffect(() => {
+    setMapPosition([mapLat || 19, mapLng || 19]);
+  }, [mapLat, mapLng]);
   return (
     <div
       className={styles.mapContainer}
@@ -20,7 +33,7 @@ export const Map = () => {
       }}
     >
       <MapContainer
-        center={mapPosition}
+        center={mapPosition} // center={[mapLat || 19, mapLng || 19]}
         zoom={13}
         scrollWheelZoom={false}
         className={styles.map}
@@ -36,7 +49,22 @@ export const Map = () => {
             </Popup>
           </Marker>;
         })}
+        <ChangeCenter position={[mapLat || 19, mapLng || 19]} />
+        <DetectClick />
       </MapContainer>
     </div>
   );
 };
+
+function ChangeCenter({ position }) {
+  const map = useMap();
+  map.setView(position);
+  return null;
+}
+
+function DetectClick() {
+  const navigate = useNavigate();
+  useMapEvent("click", (e) => {
+    navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
+  });
+}
