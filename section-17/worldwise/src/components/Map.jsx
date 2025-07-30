@@ -12,7 +12,7 @@ import {
 import { useCities } from "../context/CitiesContext";
 import { useGeolocation } from "../hooks/useGeolocation";
 import { Button } from "./Button";
-import Spinner from "./Spinner";
+import { useUrlPosition } from "../hooks/useUrlPosition";
 // eslint-disable-next-line no-unused-vars
 
 export const Map = () => {
@@ -26,9 +26,7 @@ export const Map = () => {
     position: geoLocationPosition,
     getPosition,
   } = useGeolocation();
-
-  const mapLat = searchParams.get("lat");
-  const mapLng = searchParams.get("lng");
+  const [mapLat, mapLng] = useUrlPosition();
 
   useEffect(() => {
     setMapPosition([mapLat || 19, mapLng || 19]);
