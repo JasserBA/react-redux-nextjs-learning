@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 /* eslint-disable react-refresh/only-export-components */
-
+const URL = "http://localhost:8000";
 const CitiesContext = createContext();
 
 function CitiesProvider({ children }) {
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentCity, setCurrentCity] = useState({});
 
   useEffect(() => {
     async function fetchCities() {
@@ -21,10 +22,23 @@ function CitiesProvider({ children }) {
       }
     }
     fetchCities();
-  }, [setCities]);
+  }, []);
+
+  async function getCity(id) {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${URL}/cities//${id}`);
+      const data = await res.json();
+      setCurrentCity(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
-    <CitiesContext.Provider value={{ cities, isLoading }}>
+    <CitiesContext.Provider value={{ cities, isLoading, currentCity, getCity }}>
       {children}
     </CitiesContext.Provider>
   );
