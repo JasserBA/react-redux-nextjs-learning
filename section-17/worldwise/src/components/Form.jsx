@@ -6,6 +6,9 @@ import { BackButton } from "./BackButton";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 import { convertToEmoji } from "../utils/convertToEmoji";
 import Message from "./Message";
+import Spinner from "./Spinner";
+import { useCities } from "../context/CitiesContext";
+import { useNavigate } from "react-router-dom";
 
 function Form() {
   const [cityName, setCityName] = useState("");
@@ -19,6 +22,8 @@ function Form() {
   const [geoCodingError, setGeoCodingError] = useState(null);
   const [emoji, setEmoji] = useState("");
 
+  const { createCity, isLoading } = useCities();
+  const navigate = useNavigate();
   useEffect(() => {
     if (!lat || !lng) return;
 
@@ -50,12 +55,39 @@ function Form() {
     fetchCityData();
   }, [lat, lng]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!cityName || !country || !date) {
+      setGeoCodingError("Please fill in all fields before submitting.");
+      return;
+    }
+
+    const newCity = {
+      cityName,
+      country,
+      emoji,
+      date,
+      notes,
+      position: { lat, lng },
+    };
+    await createCity(newCity);
+    navigate("/app/cities");
+    console.log(newCity);
+  };
+
+  if (isLoadingPosition) return <Spinner />;
   if (geoCodingError) {
     return <Message type="error" message={geoCodingError} />;
   }
+  if (!lat && !lng) {
+    return (
+      <Message type="info" message="Click on the map to get your position." />
+    );
+  }
 
   return (
-    <form className={styles.form}>
+    <form className={`${styles.form} ${isLoading ? styles.loading : ""}`}>
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input
@@ -86,7 +118,9 @@ function Form() {
       </div>
 
       <div className={styles.buttons}>
-        <Button type="primary">Add</Button>
+        <Button type="primary" onClick={handleSubmit}>
+          Add
+        </Button>
         <BackButton />
       </div>
     </form>

@@ -10,7 +10,7 @@
         "lat": 38.727881642324164,
         "lng": -9.140900099907554
       },
-      "id": 73930385
+      "id": "73930385"
     },
     {
       "cityName": "Madrid",
@@ -22,7 +22,7 @@
         "lat": 40.46635901755316,
         "lng": -3.7133789062500004
       },
-      "id": 17806751
+      "id": "17806751"
     },
     {
       "cityName": "Berlin",
@@ -34,7 +34,7 @@
         "lat": 52.53586782505711,
         "lng": 13.376933665713324
       },
-      "id": 98443197
+      "id": "98443197"
     },
     {
       "cityName": "Nijar",
@@ -46,7 +46,367 @@
         "lat": "36.967508314568164",
         "lng": "-2.13128394200588"
       },
-      "id": 98443198
+      "id": "98443198"
+    },
+    {
+      "id": "48b6",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "c74e",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "aaa",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "009c",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "aaa",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "7125",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "bbab",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "6d16",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "c0ad",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "fc84",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "aaa",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "1a76",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "aaa",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "1413",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "aaa",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "7253",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "aaa",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "8ab7",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "aaa",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "8be3",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "aaa",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "a756",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "e216",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "5770",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "c98b",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "0f3a",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "91ff",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "800e",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "8858",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "859a",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "d2a9",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "a825",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "eeda",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "101b",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "2093",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "727d",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "c85e",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
+    },
+    {
+      "id": "7991",
+      "cityName": "Bardai",
+      "country": "Chad",
+      "emoji": "🇹🇩",
+      "date": "2025-07-31",
+      "notes": "",
+      "position": {
+        "lat": 19,
+        "lng": 19
+      }
     }
   ]
 }
