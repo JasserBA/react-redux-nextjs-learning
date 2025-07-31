@@ -25,18 +25,6 @@
       "id": "17806751"
     },
     {
-      "cityName": "Berlin",
-      "country": "Germany",
-      "emoji": "🇩🇪",
-      "date": "2027-02-12T09:24:11.863Z",
-      "notes": "Amazing 😃",
-      "position": {
-        "lat": 52.53586782505711,
-        "lng": 13.376933665713324
-      },
-      "id": "98443197"
-    },
-    {
       "cityName": "Nijar",
       "country": "Spain",
       "emoji": "🇪🇸",
@@ -374,30 +362,6 @@
     },
     {
       "id": "727d",
-      "cityName": "Bardai",
-      "country": "Chad",
-      "emoji": "🇹🇩",
-      "date": "2025-07-31",
-      "notes": "",
-      "position": {
-        "lat": 19,
-        "lng": 19
-      }
-    },
-    {
-      "id": "c85e",
-      "cityName": "Bardai",
-      "country": "Chad",
-      "emoji": "🇹🇩",
-      "date": "2025-07-31",
-      "notes": "",
-      "position": {
-        "lat": 19,
-        "lng": 19
-      }
-    },
-    {
-      "id": "7991",
       "cityName": "Bardai",
       "country": "Chad",
       "emoji": "🇹🇩",
