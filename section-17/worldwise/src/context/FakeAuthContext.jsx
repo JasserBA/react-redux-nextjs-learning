@@ -1,8 +1,7 @@
-import { useContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
+/* eslint-disable react-refresh/only-export-components */
+const FakeAuthContext = createContext();
 
-const FakeAuthContext = () => {
-  return <div>FakeAuthContext</div>;
-};
 const initialState = {
   user: null,
   isAuthenticated: false,
@@ -42,6 +41,7 @@ function FakeAuthProvider({ children }) {
         type: "login",
         payload: FAKE_USER,
       });
+    console.log(`Logged in as ${email}`);
   }
   function logout() {
     dispatch({
@@ -61,4 +61,5 @@ function useFakeAuth() {
     throw new Error("useFakeAuth must be used within a FakeAuthProvider");
   return context;
 }
-export { FakeAuthProvider, useFakeAuth, FakeAuthContext };
+
+export { FakeAuthProvider, useFakeAuth };
