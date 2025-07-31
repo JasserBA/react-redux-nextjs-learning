@@ -10,25 +10,31 @@ import Message from "./Message";
 function Form() {
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10)); // format for input[type=date]
   const [notes, setNotes] = useState("");
-  const [lat, lng] = useUrlPosition();
+  const [lat, lng] = useUrlPosition() || [];
   const [isLoadingPosition, setIsLoadingPosition] = useState(false);
 
   const URL = "https://api.bigdatacloud.net/data/reverse-geocode-client";
   const [geoCodingError, setGeoCodingError] = useState(null);
-  const [emoji, setEmoji] = convertToEmoji(country);
+  const [emoji, setEmoji] = useState("");
+
   useEffect(() => {
+    if (!lat || !lng) return;
+
     async function fetchCityData() {
       try {
         setGeoCodingError("");
         setIsLoadingPosition(true);
         const res = await fetch(`${URL}?latitude=${lat}&longitude=${lng}`);
         const data = await res.json();
-        if (!data.countryCode)
+
+        if (!data.countryCode) {
           throw new Error(
             "No country data found! Click somewhere on the map to get your position."
           );
+        }
+
         setCityName(data.city || data.locality || "Unknown City");
         setCountry(data.countryName || "Unknown Country");
         setEmoji(convertToEmoji(data.countryCode));
@@ -40,12 +46,14 @@ function Form() {
         setIsLoadingPosition(false);
       }
     }
+
     fetchCityData();
-  }, [lat, lng, setEmoji]);
+  }, [lat, lng]);
 
   if (geoCodingError) {
     return <Message type="error" message={geoCodingError} />;
   }
+
   return (
     <form className={styles.form}>
       <div className={styles.row}>
@@ -55,12 +63,13 @@ function Form() {
           onChange={(e) => setCityName(e.target.value)}
           value={cityName}
         />
-        {/* <span className={styles.flag}>{emoji}</span> */}
+        <span className={styles.flag}>{emoji}</span>
       </div>
 
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
         <input
+          type="date"
           id="date"
           onChange={(e) => setDate(e.target.value)}
           value={date}
