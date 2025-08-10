@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { PostProvider, usePosts } from "./PostContext";
 
-function AppV2() {
+function AppMemo() {
   const [isFakeDark, setIsFakeDark] = useState(false);
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
   useEffect(
@@ -10,6 +10,11 @@ function AppV2() {
     },
     [isFakeDark]
   );
+
+  const archiveOptions = {
+    show: true,
+    title: "Post Archive",
+  };
   return (
     <section>
       <button
@@ -21,7 +26,7 @@ function AppV2() {
       <PostProvider>
         <Header />
         <Main />
-        <Archive />
+        <Archive archiveOptions={archiveOptions} />
         <Footer />
       </PostProvider>
     </section>
@@ -114,19 +119,22 @@ function FormAddPost() {
 function List() {
   const { posts } = usePosts();
   return (
-    <ul>
-      {posts.map((post, i) => (
-        <li key={i}>
-          <h3>{post.title}</h3>
-          <p>{post.body}</p>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul>
+        {posts.map((post, i) => (
+          <li key={i}>
+            <h3>{post.title}</h3>
+            <p>{post.body}</p>
+          </li>
+        ))}
+      </ul>
+      {/* <Test /> */}
+    </>
   );
 }
 
-function Archive() {
-  const { onAddPost, createRandomPost } = usePosts();
+const Archive = memo(function Archive({ archiveOptions }) {
+  const { createRandomPost } = usePosts();
 
   // Here we don't need the setter function. We're only using state to store these posts because the callback function passed into useState (which generates the posts) is only called once, on the initial render. So we use this trick as an optimization technique, because if we just used a regular variable, these posts would be re-created on every render. We could also move the posts outside the components, but I wanted to show you this trick 😉
   const [posts] = useState(() =>
@@ -134,11 +142,11 @@ function Archive() {
     Array.from({ length: 10000 }, () => createRandomPost())
   );
 
-  const [showArchive, setShowArchive] = useState(false);
+  const [showArchive, setShowArchive] = useState(archiveOptions.show);
 
   return (
     <aside>
-      <h2>Post archive</h2>
+      <h2>{archiveOptions.title}</h2>
       <button onClick={() => setShowArchive((s) => !s)}>
         {showArchive ? "Hide archive posts" : "Show archive posts"}
       </button>
@@ -150,17 +158,17 @@ function Archive() {
               <p>
                 <strong>{post.title}:</strong> {post.body}
               </p>
-              <button onClick={() => onAddPost(post)}>Add as new post</button>
+              {/* <button onClick={() => onAddPost(post)}>Add as new post</button> */}
             </li>
           ))}
         </ul>
       )}
     </aside>
   );
-}
+});
 
 function Footer() {
   return <footer>&copy; by The Atomic Blog ✌️</footer>;
 }
 
-export default AppV2;
+export default AppMemo;
