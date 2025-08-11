@@ -39,6 +39,11 @@ function Calculator({ workouts, allowSound }) {
     playSound();
   }, [duration, allowSound]); // if duration changes, it will play the sound (without using useCallback)
 
+  useEffect(() => {
+    document.title = `Workout timer: ${mins < 10 ? "0" : ""}${mins}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}`;
+  }, [mins, seconds]);
   return (
     <>
       <form>
