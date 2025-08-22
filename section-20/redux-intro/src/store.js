@@ -1,3 +1,4 @@
+import { createStore } from "redux";
 const initialState = {
   balance: 0,
   loan: 0,
@@ -33,7 +34,7 @@ function reducer(state = initialState, action) {
     case "account/withdraw":
       return {
         ...state,
-        loan: action.payload - action.payload,
+        loan: action.loan - action.payload,
       };
     case "account/requestLoan":
       if (state.load > 0) return state;
@@ -41,6 +42,8 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         loan: action.payload,
+        loanPurpose: action.loanPurpose || "",
+        balance: state.balance + action.payload.amount,
       };
 
     case "account/payLoan":
@@ -54,3 +57,59 @@ function reducer(state = initialState, action) {
       return state;
   }
 }
+
+const store = createStore(reducer);
+
+// store.dispatch({ type: "account/deposit", payload: 600 });
+// console.log("hey redux"); // show current state
+// console.log(store.getState()); // { balance: 1200, loan: 0, loanPurpose: "" }
+// store.dispatch({ type: "account/requestLoan", payload: 200 });
+// console.log(store.getState()); // { balance: 1200, loan: 200, loanPurpose: "" }
+
+// store.dispatch({
+//   type: "account/requestLoan",
+//   payload: { amount: 1000, loanPurpose: "Buy a house" },
+// });
+// console.log(store.getState()); // {"balance": 1200,"loan": {"amount": 1000,"loanPurpose": "Buy a house"},"loanPurpose": ""}
+
+// store.dispatch({
+//   type: "account/payLoan",
+// });
+
+const ACCOUNT_ACTIONS = {
+  DEPOSIT: "account/deposit",
+  WITHDRAW: "account/withdraw",
+  REQUEST_LOAN: "account/requestLoan",
+  PAY_LOAN: "account/payLoan",
+};
+
+function deposit(amount) {
+  return { type: ACCOUNT_ACTIONS.DEPOSIT, payload: amount };
+}
+
+function withdraw(amount) {
+  return { type: ACCOUNT_ACTIONS.WITHDRAW, payload: amount };
+}
+
+function requestLoan(amount, loanPurpose) {
+  return {
+    type: ACCOUNT_ACTIONS.REQUEST_LOAN,
+    payload: { amount, loanPurpose },
+  };
+}
+
+function payLoan() {
+  return { type: ACCOUNT_ACTIONS.PAY_LOAN };
+}
+store.dispatch(deposit(600));
+console.log("hey redux"); // show current state
+console.log(store.getState()); // { balance: 1200, loan: 0, loanPurpose: "" }
+
+store.dispatch(withdraw(200, "Buy a house"));
+console.log(store.getState());
+
+store.dispatch(requestLoan(200, "Buy a house"));
+console.log(store.getState()); // { balance: 1200, loan: 200, loanPurpose: "Buy a house" }
+
+store.dispatch(payLoan());
+console.log(store.getState()); // { balance: 1200, loan: 200, loanPurpose: "Buy a house
