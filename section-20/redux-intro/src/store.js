@@ -1,11 +1,17 @@
-import { createStore } from "redux";
-const initialState = {
+import { combineReducers, createStore } from "redux";
+const initialStateAccount = {
   balance: 0,
   loan: 0,
   loanPurpose: "",
 };
 
-function reducer(state = initialState, action) {
+const initialStateCustomer = {
+  fullName: "",
+  nationalId: "",
+  createdAt: "",
+};
+
+function accountReducer(state = initialStateAccount, action) {
   //   switch (action.type) {
   //     case "SET_BALANCE":
   //       return {
@@ -58,7 +64,30 @@ function reducer(state = initialState, action) {
   }
 }
 
-const store = createStore(reducer);
+function customerReducer(state = initialStateCustomer, action) {
+  switch (action.type) {
+    case "customer/createCustomer":
+      return {
+        ...state,
+        fullName: action.payload.fullName,
+        nationalId: action.payload.nationalId,
+        createdAt: action.payload.createdAt,
+      };
+    case "customer/updateName":
+      return {
+        ...state,
+        fullName: action.payload.fullName,
+      };
+    default:
+      return state;
+  }
+}
+
+const rootReducer = combineReducers({
+  account: accountReducer,
+  customer: customerReducer,
+});
+const store = createStore(rootReducer);
 
 // store.dispatch({ type: "account/deposit", payload: 600 });
 // console.log("hey redux"); // show current state
@@ -113,3 +142,22 @@ console.log(store.getState()); // { balance: 1200, loan: 200, loanPurpose: "Buy 
 
 store.dispatch(payLoan());
 console.log(store.getState()); // { balance: 1200, loan: 200, loanPurpose: "Buy a house
+
+function createCustomer(fullName, nationalId) {
+  return {
+    type: "customer/createCustomer",
+    payload: { fullName, nationalId, createdAt: new Date().toISOString() },
+  };
+}
+
+function updateName(fullName) {
+  return {
+    type: "customer/updateName",
+    payload: { fullName },
+  };
+}
+
+store.dispatch(createCustomer("JASSER", "123456789"));
+console.log(store.getState());
+store.dispatch(updateName("JASSER ALI"));
+console.log(store.getState());
