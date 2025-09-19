@@ -143,16 +143,18 @@ const accountSlice = createSlice({
       state.balance += action.payload.amount;
     },
   },
-  payLoan(state) {
+  payLoan(state, action) {
     state.loan = 0;
     state.loanPurpose = "";
     state.balance -= state.loan;
+  },
+  convertingCurrency(state) {
+    state.isLoading = true;
   },
 });
 
 console.log(requestLoan(1000, "buy house"));
 export const {
-  deposit: depositAction,
   withdraw: withdrawAction,
   requestLoan: requestLoanAction,
   payLoan: payLoanAction,
