@@ -1,11 +1,14 @@
-const initialStateAccount = {
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
   balance: 0,
   loan: 0,
   loanPurpose: "",
   isLoading: false,
 };
 
-export default function accountReducer(state = initialStateAccount, action) {
+/*
+export default function accountReducer(state = initialState, action) {
   //   switch (action.type) {
   //     case "SET_BALANCE":
   //       return {
@@ -75,6 +78,7 @@ export default function accountReducer(state = initialStateAccount, action) {
 // store.dispatch({
 //   type: "account/payLoan",
 // });
+*/
 
 const ACCOUNT_ACTIONS = {
   DEPOSIT: "account/deposit",
@@ -87,13 +91,13 @@ export function deposit(amount, currency) {
   if (currency === "USD")
     return { type: ACCOUNT_ACTIONS.DEPOSIT, payload: amount };
 
-  return async function (dispatch, getState) {
+  return async function (dispatch) {
     dispatch({ type: "account/convertingCurrency" });
 
     const res = await fetch(
       `https://api.frankfurter.dev/v1/latest?amount=${amount}&from=${currency}&symbols=USD`
     );
-    const data = res.json();
+    const data = await res.json();
     console.log(data);
     const converted = data.rates.USD;
 
@@ -115,3 +119,42 @@ export function requestLoan(amount, loanPurpose) {
 export function payLoan() {
   return { type: ACCOUNT_ACTIONS.PAY_LOAN };
 }
+
+const accountSlice = createSlice({
+  name: "account",
+  initialState,
+  reducers: {
+    deposit(state, action) {
+      state.balance += action.payload;
+      state.isLoading = false;
+    },
+  },
+  withdraw(state, action) {
+    state.balance -= action.payload;
+  },
+  requestLoan: {
+    prepare(amount, purpose) {
+      return { payload: { amount, loanPurpose: purpose } };
+    },
+    reducer(state, action) {
+      if (state.loan > 0) return;
+      state.loan = action.payload.amount;
+      state.loanPurpose = action.payload.loanPurpose || "";
+      state.balance += action.payload.amount;
+    },
+  },
+  payLoan(state) {
+    state.loan = 0;
+    state.loanPurpose = "";
+    state.balance -= state.loan;
+  },
+});
+
+console.log(requestLoan(1000, "buy house"));
+export const {
+  deposit: depositAction,
+  withdraw: withdrawAction,
+  requestLoan: requestLoanAction,
+  payLoan: payLoanAction,
+} = accountSlice.actions;
+export default accountSlice.reducer;
