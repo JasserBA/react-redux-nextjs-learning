@@ -87,7 +87,11 @@ function Order() {
 }
 
 export async function loader({ params }) {
+  // Fetch order from API
   const order = await getOrder(params.orderId);
+
+  // ✅ Must return the data so useLoaderData() can read it
+  return order;
 }
 
 export default Order;
