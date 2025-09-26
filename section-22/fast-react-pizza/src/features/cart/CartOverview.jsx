@@ -7,7 +7,12 @@ function CartOverview() {
         <span>23 pizzas</span>
         <span>$23.45</span>
       </p>
-      <Link to="/cart">Open cart &rarr;</Link>
+      <Link
+        to="/cart"
+        className="text-sm text-yellow-400 hover:text-yellow-600"
+      >
+        Open cart &rarr;
+      </Link>
     </div>
   );
 }

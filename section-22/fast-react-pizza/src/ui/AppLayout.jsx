@@ -9,10 +9,10 @@ const AppLayout = () => {
   const isLoading = navigation.state === "loading";
 
   return (
-    <div className="layout">
+    <div className="grid min-h-screen grid-rows-[auto_1fr_auto]">
       {isLoading && <Loader />}
       <Header />
-      <main>
+      <main className="pt-4 pb-20 sm:pb-4 mx-auto w-full max-w-4xl">
         <Outlet />
       </main>
       <CartOverview />
