@@ -3,11 +3,10 @@ import { getMenu } from "../../services/apiRestaurant";
 import MenuItem from "./MenuItem";
 
 function Menu() {
-  // Correctly destructure the 'menu' key from the returned object
   const { menu } = useLoaderData();
 
   return (
-    <ul>
+    <ul className="max-w-4xl mx-auto divide-y divide-stone-200 px-2">
       {menu.map((pizza) => (
         <MenuItem key={pizza.id} pizza={pizza} />
       ))}

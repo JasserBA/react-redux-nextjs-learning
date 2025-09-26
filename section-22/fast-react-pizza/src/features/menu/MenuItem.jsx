@@ -1,24 +1,37 @@
 import { formatCurrency } from "../../utils/helpers";
-import PropTypes from "prop-types"; // 👈 Import PropTypes
-
+import PropTypes from "prop-types";
+import { Button } from "../../ui/Button";
 function MenuItem({ pizza }) {
-  const { name, unitPrice, ingredients, soldOut, imageUrl } = pizza; // 👈 Removed 'id'
+  const { name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
 
   return (
-    <li>
-      <img src={imageUrl} alt={name} />
-      <div>
-        <p>{name}</p>
-        <p>{ingredients.join(", ")}</p>
-        <div>
-          {!soldOut ? <p>{formatCurrency(unitPrice)}</p> : <p>Sold out</p>}
+    <li className="flex gap-4 border-b border-b-stone-200 p-4 hover:bg-stone-200 sm:p-6">
+      <img
+        src={imageUrl}
+        alt={name}
+        className={`h-24 ${soldOut ? "grayscale opacity-70" : ""}`}
+      />
+      <div className="flex flex-col flex-1">
+        <p className="font-medium">{name}</p>
+        <p className="text-sm italic text-stone-500">
+          {ingredients.join(", ")}
+        </p>
+        <div className="mt-auto text-right font-bold flex flex-grow items-center justify-between">
+          {!soldOut ? (
+            <p className="text-sm uppercase font-medium">
+              {formatCurrency(unitPrice)}
+            </p>
+          ) : (
+            <p>Sold out</p>
+          )}
+
+          <Button>Add to cart</Button>
         </div>
       </div>
     </li>
   );
 }
 
-// 👈 Add prop types validation here
 MenuItem.propTypes = {
   pizza: PropTypes.shape({
     id: PropTypes.number.isRequired,
