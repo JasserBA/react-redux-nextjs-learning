@@ -48,13 +48,23 @@ function CreateOrder() {
       <Form method="POST">
         <div>
           <label>First Name</label>
-          <input type="text" name="customer" required />
+          <input
+            className="rounded-md border border-stone-200 px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-blue-200 w-full"
+            type="text"
+            name="customer"
+            required
+          />
         </div>
 
         <div>
           <label>Phone number</label>
           <div>
-            <input type="tel" name="phone" required />
+            <input
+              className="rounded-md border border-stone-200 px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-blue-200 w-full"
+              type="tel"
+              name="phone"
+              required
+            />
           </div>
           <p>{formErrors?.phone && formErrors.phone}</p>
         </div>
@@ -62,12 +72,18 @@ function CreateOrder() {
         <div>
           <label>Address</label>
           <div>
-            <input type="text" name="address" required />
+            <input
+              className="rounded-md border border-stone-200 px-4 py-2 text-sm transition-all duration-300 placeholder:text-stone-400 focus:outline-none focus:ring focus:ring-blue-200 w-full"
+              type="text"
+              name="address"
+              required
+            />
           </div>
         </div>
 
         <div>
           <input
+            className="h-6 w-6 accent-blue-400 focus:outline-none focus:ring focus:ring-blue-300"
             type="checkbox"
             name="priority"
             id="priority"
