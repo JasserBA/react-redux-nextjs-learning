@@ -2,6 +2,7 @@
 
 import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
+import { Button } from "../../ui/Button";
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
     str
@@ -80,12 +81,9 @@ function CreateOrder() {
 
         <div>
           <input hidden name="cart" value={JSON.stringify(cart)} />
-          <button
-            disabled={isSubmitting}
-            className="inline-block btn btn--accent uppercase font-semibold py-2 px-4 bg-blue-400 hover:bg-blue-500 rounded-md tracking-wide duration-100 focus-outline-none focus:ring disabled:cursor-not-allowed disabled:bg-gray-400"
-          >
+          <Button disabled={isSubmitting}>
             {isSubmitting ? "Placing order..." : "Order now"}
-          </button>
+          </Button>
         </div>
       </Form>
     </div>
