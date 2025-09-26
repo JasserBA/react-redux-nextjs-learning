@@ -1,86 +1,72 @@
-// Test ID: IIDSAT
-
+import { useLoaderData } from "react-router-dom";
 import { getOrder } from "../../services/apiRestaurant";
 import {
   calcMinutesLeft,
   formatCurrency,
   formatDate,
 } from "../../utils/helpers";
-import { useLoaderData } from "react-router-dom";
-
-const order = {
-  id: "ABCDEF",
-  customer: "Jonas",
-  phone: "123456789",
-  address: "Arroios, Lisbon , Portugal",
-  priority: true,
-  estimatedDelivery: "2027-04-25T10:00:00",
-  cart: [
-    {
-      pizzaId: 7,
-      name: "Napoli",
-      quantity: 3,
-      unitPrice: 16,
-      totalPrice: 48,
-    },
-    {
-      pizzaId: 5,
-      name: "Diavola",
-      quantity: 2,
-      unitPrice: 16,
-      totalPrice: 32,
-    },
-    {
-      pizzaId: 3,
-      name: "Romana",
-      quantity: 1,
-      unitPrice: 15,
-      totalPrice: 15,
-    },
-  ],
-  position: "-9.000,38.000",
-  orderPrice: 95,
-  priorityPrice: 19,
-};
 
 function Order() {
-  const order = useLoaderData();
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
+  const order = useLoaderData();
+
   const {
     id,
     status,
     priority,
-    priorityPrice,
+    priorityPrice = 0,
     orderPrice,
     estimatedDelivery,
     cart,
   } = order;
+
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
-    <div>
-      <div>
-        <h2>Status</h2>
-
-        <div>
-          {priority && <span>Priority</span>}
-          <span>{status} order</span>
+    <div className="max-w-3xl mx-auto p-6 space-y-6">
+      <div className="bg-white border rounded-lg p-4 shadow-sm">
+        <h2 className="text-xl font-semibold mb-2">Status</h2>
+        <div className="flex items-center gap-4">
+          {priority && (
+            <span className="bg-yellow-200 text-yellow-800 px-2 py-1 rounded">
+              Priority
+            </span>
+          )}
+          <span className="text-stone-700 font-medium">{status} order</span>
         </div>
       </div>
 
-      <div>
-        <p>
+      <div className="bg-white border rounded-lg p-4 shadow-sm">
+        <p className="text-stone-800">
           {deliveryIn >= 0
-            ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 😃`
+            ? `Only ${deliveryIn} minutes left 😃`
             : "Order should have arrived"}
         </p>
-        <p>(Estimated delivery: {formatDate(estimatedDelivery)})</p>
+        <p className="text-sm text-stone-500">
+          (Estimated delivery: {formatDate(estimatedDelivery)})
+        </p>
       </div>
 
-      <div>
+      <div className="bg-white border rounded-lg p-4 shadow-sm space-y-1">
         <p>Price pizza: {formatCurrency(orderPrice)}</p>
         {priority && <p>Price priority: {formatCurrency(priorityPrice)}</p>}
-        <p>To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}</p>
+        <p className="font-semibold">
+          To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
+        </p>
+      </div>
+
+      <div className="bg-white border rounded-lg p-4 shadow-sm">
+        <h3 className="text-lg font-semibold mb-2">Order Items</h3>
+        <ul className="space-y-2">
+          {cart.map((item) => (
+            <li key={item.pizzaId} className="flex justify-between">
+              <span>
+                {item.quantity} × {item.name}
+              </span>
+              <span>{formatCurrency(item.totalPrice)}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
@@ -89,8 +75,6 @@ function Order() {
 export async function loader({ params }) {
   // Fetch order from API
   const order = await getOrder(params.orderId);
-
-  // ✅ Must return the data so useLoaderData() can read it
   return order;
 }
 

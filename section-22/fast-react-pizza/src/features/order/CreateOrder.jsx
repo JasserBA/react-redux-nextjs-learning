@@ -30,10 +30,8 @@ const fakeCart = [
 function CreateOrder() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
-
   const formErrors = useActionData();
 
-  // const [withPriority, setWithPriority] = useState(false);
   const cart = fakeCart;
 
   return (
@@ -54,9 +52,7 @@ function CreateOrder() {
           <div className="grow">
             <input className="input" type="tel" name="phone" required />
           </div>
-          <p className="text-red-500 text-sm mt-1 bg-red-100 p-3 rounded-md">
-            {formErrors?.phone && formErrors.phone}
-          </p>
+          <p className="text-red-500 text-sm mt-1">{formErrors?.phone}</p>
         </div>
 
         <div className="my-4">
@@ -72,8 +68,6 @@ function CreateOrder() {
             type="checkbox"
             name="priority"
             id="priority"
-            // value={withPriority}
-            // onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label htmlFor="priority">Want to give your order priority?</label>
         </div>
@@ -92,7 +86,6 @@ function CreateOrder() {
 export async function action({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
 
   const order = {
     ...data,
@@ -100,18 +93,19 @@ export async function action({ request }) {
     priority: data.priority === "on",
   };
 
-  // If EVERYTHING is valid, create the new order
-  // const newOrder = await createOrder(order);
-
+  // Validation
   const errors = {};
-  if (!isValidPhone(order.phone))
+  if (!isValidPhone(order.phone)) {
     errors.phone = "Please give us a valid phone number";
+  }
 
   if (Object.keys(errors).length > 0) return errors;
 
-  // return redirect(`/order/${newOrder.id}`);
+  // Create the order in backend
+  const newOrder = await createOrder(order);
 
-  return null;
+  // Redirect to the newly created order page
+  return redirect(`/order/${newOrder.id}`);
 }
 
 export default CreateOrder;

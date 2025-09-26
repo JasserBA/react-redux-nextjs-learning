@@ -10,7 +10,7 @@ function CreateUser() {
     e.preventDefault();
     if (username.trim() !== "") {
       console.log("Username submitted:", username);
-      navigate("/");
+      navigate("/menu");
     }
   }
 
