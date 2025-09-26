@@ -3,6 +3,7 @@
 import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
 import { Button } from "../../ui/Button";
+
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
     str
@@ -16,13 +17,7 @@ const fakeCart = [
     unitPrice: 16,
     totalPrice: 32,
   },
-  {
-    pizzaId: 6,
-    name: "Vegetale",
-    quantity: 1,
-    unitPrice: 13,
-    totalPrice: 13,
-  },
+  { pizzaId: 6, name: "Vegetale", quantity: 1, unitPrice: 13, totalPrice: 13 },
   {
     pizzaId: 11,
     name: "Spinach and Mushroom",
@@ -42,32 +37,36 @@ function CreateOrder() {
   const cart = fakeCart;
 
   return (
-    <div>
-      <h2>Ready to order? Let&apos;s go!</h2>
+    <div className="max-w-3xl mx-auto px-4 py-8">
+      <h2 className="text-xl mb-8 font-semibold">
+        Ready to order? Let&apos;s go!
+      </h2>
 
       {/* <Form method="POST" action="/order/new"> */}
       <Form method="POST">
-        <div>
-          <label>First Name</label>
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">First Name</label>
           <input className="input" type="text" name="customer" required />
         </div>
 
-        <div>
-          <label>Phone number</label>
-          <div>
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">Phone number</label>
+          <div className="grow">
             <input className="input" type="tel" name="phone" required />
           </div>
-          <p>{formErrors?.phone && formErrors.phone}</p>
+          <p className="text-red-500 text-sm mt-1 bg-red-100 p-3 rounded-md">
+            {formErrors?.phone && formErrors.phone}
+          </p>
         </div>
 
-        <div>
-          <label>Address</label>
-          <div>
+        <div className="my-4">
+          <label className="block mb-1 font-medium">Address</label>
+          <div className="grow">
             <input className="input" type="text" name="address" required />
           </div>
         </div>
 
-        <div>
+        <div className="mt-4 flex items-center gap-2">
           <input
             className="h-6 w-6 accent-blue-400 focus:outline-none focus:ring focus:ring-blue-300"
             type="checkbox"
@@ -76,10 +75,10 @@ function CreateOrder() {
             // value={withPriority}
             // onChange={(e) => setWithPriority(e.target.checked)}
           />
-          <label htmlFor="priority">Want to yo give your order priority?</label>
+          <label htmlFor="priority">Want to give your order priority?</label>
         </div>
 
-        <div>
+        <div className="mt-8 flex gap-4 items-center">
           <input hidden name="cart" value={JSON.stringify(cart)} />
           <Button disabled={isSubmitting}>
             {isSubmitting ? "Placing order..." : "Order now"}
@@ -92,7 +91,6 @@ function CreateOrder() {
 
 export async function action({ request }) {
   const formData = await request.formData();
-  // fromEntries turns array into object
   const data = Object.fromEntries(formData);
   console.log(data);
 
@@ -115,4 +113,5 @@ export async function action({ request }) {
 
   return null;
 }
+
 export default CreateOrder;
