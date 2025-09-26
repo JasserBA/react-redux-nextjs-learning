@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { LinkButton } from "../../ui/LinkButton";
+import CartItem from "./CartItem";
 
 const fakeCart = [
   {
@@ -37,18 +38,7 @@ function Cart() {
 
       <div className="space-y-4 mb-6">
         {cart.map((item) => (
-          <div
-            key={item.pizzaId}
-            className="flex justify-between items-center rounded-lg border border-stone-200 bg-white p-4 shadow-sm"
-          >
-            <div>
-              <p className="font-semibold text-stone-800">{item.name}</p>
-              <p className="text-sm text-stone-600">
-                {item.quantity} × ${item.unitPrice}
-              </p>
-            </div>
-            <span className="font-bold text-stone-800">${item.totalPrice}</span>
-          </div>
+          <CartItem key={item.pizzaId} item={item} />
         ))}
       </div>
 
@@ -62,7 +52,7 @@ function Cart() {
         </Link>
 
         <button
-          className="px-6 py-2 rounded-md border border-red-400 text-red-500 font-medium 
+          className="bg-red-100  px-6 py-2 rounded-md border border-red-400 text-red-500 font-medium 
                      hover:bg-red-50 transition duration-200 focus:outline-none focus:ring focus:ring-red-300"
         >
           Clear cart
